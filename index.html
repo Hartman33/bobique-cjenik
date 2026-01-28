@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bobique Cjenik</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(-45deg, #ff9a9e, #fecfef, #fecfef, #ff9a9e);
+      background-size: 400% 400%;
+      animation: gradientShift 15s ease infinite;
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+    }
+    
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    
+    /* Čestice animacija */
+    .particles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+    
+    .particle {
+      position: absolute;
+      background: rgba(255, 255, 255, 0.6);
+      border-radius: 50%;
+      animation: float 6s infinite linear;
+    }
+    
+    .particle:nth-child(1) { width: 8px; height: 8px; left: 10%; animation-delay: 0s; animation-duration: 12s; }
+    .particle:nth-child(2) { width: 12px; height: 12px; left: 20%; animation-delay: 1s; animation-duration: 15s; }
+    .particle:nth-child(3) { width: 6px; height: 6px; left: 80%; animation-delay: 2s; animation-duration: 10s; }
+    .particle:nth-child(4) { width: 10px; height: 10px; left: 90%; animation-delay: 3s; animation-duration: 14s; }
+    .particle:nth-child(5) { width: 7px; height: 7px; left: 30%; animation-delay: 4s; animation-duration: 11s; }
+    
+    @keyframes float {
+      0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+      10% { opacity: 1; }
+      90% { opacity: 1; }
+      100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
+    }
+    
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+      position: relative;
+      z-index: 10;
+    }
+    
+    .header {
+      text-align: center;
+      margin-bottom: 60px;
+      animation: slideDown 1s ease-out;
+    }
+    
+    @keyframes slideDown {
+      from { opacity: 0; transform: translateY(-50px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3rem, 10vw, 6rem);
+      background: linear-gradient(45deg, #ff6b9d, #c44569, #ff6b9d);
+      background-size: 300% 300%;
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: textShimmer 3s ease-in-out infinite;
+      font-weight: 700;
+      margin-bottom: 15px;
+    }
+    
+    @keyframes textShimmer {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+    
+    .subtitle {
+      font-size: 1.4rem;
+      color: white;
+      font-weight: 300;
+      text-shadow: 0 4px 15px rgba(0,0,0,0.3);
+      animation: fadeInUp 1.5s ease-out 0.3s both;
+      background: rgba(255,255,255,0.2);
+      padding: 12px 30px;
+      border-radius: 50px;
+      display: inline-block;
+      backdrop-filter: blur(10px);
+    }
+    
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 30px;
+      margin-bottom: 40px;
+    }
+    
+    .price-card {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(25px);
+      border-radius: 25px;
+      padding: 40px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      box-shadow: 0 25px 50px rgba(0,0,0,0.2);
+      position: relative;
+      overflow: hidden;
+      transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      animation: cardRise 1s ease-out both;
+    }
+    
+    .price-card:nth-child(1) { animation-delay: 0.2s; }
+    .price-card:nth-child(2) { animation-delay: 0.4s; }
+    .price-card:nth-child(3) { animation-delay: 0.6s; }
+    
+    @keyframes cardRise {
+      from { opacity: 0; transform: translateY(50px) scale(0.9); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+    
+    .price-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+      transition: left 0.7s;
+    }
+    
+    .price-card:hover::before {
+      left: 100%;
+    }
+    
+    .price-card:hover {
+      transform: translateY(-20px) scale(1.05) rotateX(5deg);
+      box-shadow: 0 40px 80px rgba(0,0,0,0.4);
+      border-color: rgba(255, 107, 157, 0.5);
+    }
+    
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.2rem;
+      color: white;
+      text-align: center;
+      margin-bottom: 30px;
+      font-weight: 600;
+      position: relative;
+      text-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    }
+    
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 4px;
+      background: linear-gradient(90deg, #ff6b9d, transparent);
+      border-radius: 2px;
+      animation: lineGlow 2s ease-in-out infinite;
+    }
+    
+    @keyframes lineGlow {
+      0%, 100% { box-shadow: 0 0 10px rgba(255, 107, 157, 0.5); }
+      50% { box-shadow: 0 0 20px rgba(255, 107, 157, 0.8); }
+    }
+    
+    .price-list {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+    
+    .price-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      transition: all 0.4s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .price-item::before {
+      content: '\f4d8'; /* Font Awesome CVIJET - elegantna ruža/buket */
+      font-family: "Font Awesome 6 Free";
+      font-weight: 900;
+      position: absolute;
+      left: 20px;
+      color: #ff6b9d;
+      font-size: 1.3rem;
+      z-index: 2;
+      animation: rosePulse 2s ease-in-out infinite;
+    }
+    
+    @keyframes rosePulse {
+      0%, 100% { transform: scale(1) rotate(0deg); }
+      50% { transform: scale(1.2) rotate(10deg); }
+    }
+    
+    .price-item:hover {
+      transform: translateX(15px) scale(1.02);
+      background: rgba(255, 255, 255, 0.15);
+      border-color: rgba(255, 107, 157, 0.3);
+      box-shadow: 0 10px 30px rgba(255, 107, 157, 0.2);
+    }
+    
+    .item-name {
+      font-size: 1.1rem;
+      color: white;
+      font-weight: 400;
+      padding-left: 45px;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+    }
+    
+    .price-amount {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: white;
+      text-shadow: 0 3px 15px rgba(0,0,0,0.4);
+      animation: priceFloat 3s ease-in-out infinite;
+    }
+    
+    @keyframes priceFloat {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-3px); }
+    }
+    
+    /* Neonski glow border */
+    .neon-border {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      padding: 3px;
+      border-radius: 20px;
+      background: linear-gradient(45deg, #ff6b9d, #c44569, #ff6b9d, #c44569);
+      background-size: 300% 300%;
+      animation: neonShift 4s ease infinite;
+      z-index: 0;
+      margin: 20px;
+      filter: blur(1px);
+    }
+    
+    @keyframes neonShift {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+    
+    @media (max-width: 768px) {
+      .pricing-grid {
+        grid-template-columns: 1fr;
+      }
+      .price-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+      }
+      .item-name {
+        padding-left: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Animirane čestice -->
+  <div class="particles">
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+  </div>
+  
+  <!-- Neonski border -->
+  <div class="neon-border"></div>
+  
+  <div class="container">
+    <div class="header">
+      <h1>Bobique Cjenik</h1>
+      <div class="subtitle">Ručno rađeni satenski buketi</div>
+    </div>
+    
+    <div class="pricing-grid">
+      <div class="price-card">
+        <div class="section-title">Buket</div>
+        <div class="price-list">
+          <div class="price-item">
+            <span class="item-name">Buket - kornet</span>
+            <span class="price-amount">18€</span>
+          </div>
+          <div class="price-item">
+            <span class="item-name">Buket (10)</span>
+            <span class="price-amount">25€</span>
+          </div>
+          <div class="price-item">
+            <span class="item-name">Buket (20-30)</span>
+            <span class="price-amount">40€</span>
+          </div>
+          <div class="price-item">
+            <span class="item-name">Buket (30-40)</span>
+            <span class="price-amount">50€</span>
+          </div>
+          <div class="price-item">
+            <span class="item-name">Buket (50)</span>
+            <span class="price-amount">70€</span>
+          </div>
+          <div class="price-item">
+            <span class="item-name">Buket (101)</span>
+            <span class="price-amount">170€</span>
+          </div>
+        </div>
+      </div>
+      
+      <div class="price-card">
+        <div class="section-title">Rose Box</div>
+        <div class="price-list">
+          <div class="price-item">
+            <span class="item-name">S Rose Box</span>
+            <span class="price-amount">45€</span>
+          </div>
+          <div class="price-item">
+            <span class="item-name">M Rose Box</span>
+            <span class="price-amount">55€</span>
+          </div>
+          <div class="price-item">
+            <span class="item-name">L Rose Box</span>
+            <span class="price-amount">65€</span>
+          </div>
+          <div class="price-item">
+            <span class="item-name">Memories Box</span>
+            <span class="price-amount">45€</span>
+          </div>
+        </div>
+      </div>
+      
+      <div class="price-card">
+        <div class="section-title">Zahvalnice</div>
+        <div class="price-list">
+          <div class="price-item">
+            <span class="item-name">Zahvalnice (do 20 kom)</span>
+            <span class="price-amount">1.80€</span>
+          </div>
+          <div class="price-item">
+            <span class="item-name">Zahvalnice (od 20 kom)</span>
+            <span class="price-amount">1.50€</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
