@@ -93,17 +93,33 @@
       50% { background-position: 100% 50%; }
     }
     
-    .subtitle {
-      font-size: 1.4rem;
+    .about-me {
+      font-size: 1.2rem;
+      line-height: 1.6;
       color: white;
       font-weight: 300;
       text-shadow: 0 4px 15px rgba(0,0,0,0.3);
       animation: fadeInUp 1.5s ease-out 0.3s both;
-      background: rgba(255,255,255,0.2);
-      padding: 12px 30px;
-      border-radius: 50px;
+      background: rgba(255,255,255,0.15);
+      padding: 25px 40px;
+      border-radius: 25px;
       display: inline-block;
-      backdrop-filter: blur(10px);
+      backdrop-filter: blur(15px);
+      max-width: 90%;
+      margin: 0 auto 20px;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+    }
+    
+    .about-me strong {
+      color: #ff6b9d;
+      font-weight: 500;
+    }
+    
+    @media (max-width: 768px) {
+      .about-me {
+        font-size: 1.1rem;
+        padding: 20px 30px;
+      }
     }
     
     @keyframes fadeInUp {
@@ -290,7 +306,11 @@
   <div class="container">
     <div class="header">
       <h1>Bobique Cjenik</h1>
-      <div class="subtitle">Ručno rađeni satenski buketi</div>
+      <div class="about-me">
+        Iza Bobique radionice nalazi se studentica Učiteljskog fakulteta koja je jedne sunčane subote otkrila svoju kreativnost i napravila prvi satenski buket. 
+        Od tada je pronašla svoj put u kreativnim radionicama. Svaki buket izrađen je ručno s posebnom pažnjom, vremenom i trudom. 
+        Bobique je mjesto gdje cvijeće oživljava i postaje simbol ljubavi, sreće i posebnih trenutaka. Ponuda uključuje razne vrste buketa, rose boxeva i zahvalnica za sve vaše posebne prilike. vjerujemo da će naši proizvodi unijeti radost i ljepotu u Vaš poseban trenutak.
+      </div>
     </div>
     
     <div class="pricing-grid">
@@ -363,3 +383,4 @@
   </div>
 </body>
 </html>
+
